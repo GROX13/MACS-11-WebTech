@@ -7,6 +7,11 @@ var fileReader = require('fs');
 var router = new Router();
 var server = new Server();
 
+
+//fileReader.readFile("index.html", function(e, data){
+//    console.log(data.toString());
+//});
+
 router.add("users/{id:n}/permissions/{permName:s}",
     {
         GET: function(request, response, params){
@@ -25,10 +30,16 @@ router.add("/{fileName:s}/{fileExt:s}",
         GET: function(request, response, params) {
             var file = request.url.substr(1, request.url.length - 1);
             file = file.replace("/", ".");
-            fileReader.read(file, function (err, data) {
-                response.writeHead(200, {"Content-Type":"attachment;filename:" + file});
-                response.write(data);
-                response.end();
+            fileReader.readFile(file, function (err, data) {
+                if (err) {
+
+                } else {
+
+                    response.writeHead(200, {"Content-Type": "text/html",
+                        "Content-Disposition":"attachment; filename:" + file});
+                    response.write(data);
+                    response.end();
+                }
             });
         }
     },
