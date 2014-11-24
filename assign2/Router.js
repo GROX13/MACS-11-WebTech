@@ -29,21 +29,35 @@ function Router() {
     }
 
     this.get = function(url) {
-        for (var i in map) {
-            var tmp = map[i];
-            if((tmp.regex).test(url))
-                return {callbacks:tmp.callbacks,
-                    errorHandler:tmp.errorHandler,
-                    params:composeParameterMap(url, i)};
+        try {
+            for (var key in map) {
+                var tmp = map[key];
+                if ((tmp.regex).test(url))
+                    return {
+                        callbacks: tmp.callbacks,
+                        errorHandler: tmp.errorHandler,
+                        params: composeParameterMap(url, key)
+                    };
+            }
+        } catch(error) {
+            console.error(error);
         }
     };
 
     this.add = function(route, callbacks, errorHandler) {
-        var reg = compose(route);
-        map[route] = {callbacks:callbacks, errorHandler:errorHandler, regex:reg};
+        try {
+            var reg = compose(route);
+            map[route] = {callbacks: callbacks, errorHandler: errorHandler, regex: reg};
+        } catch(error) {
+            console.error(error);
+        }
     };
 
     this.remove = function(route) {
-        delete map[route];
+        try {
+            delete map[route];
+        } catch(error) {
+            console.error(error);
+        }
     };
 }

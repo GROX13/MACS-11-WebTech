@@ -14,7 +14,9 @@ function Server() {
             } catch (error) {
                 try {
                     res.errorHandler();
-                } catch (error) {}
+                } catch (error) {
+                    console.error(error);
+                }
             }
         });
         server.listen(22222);
