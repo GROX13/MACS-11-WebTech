@@ -24,8 +24,9 @@ router.add("/{fileName:s}/{fileExt:s}",
     {
         GET: function(request, response, params) {
             var file = request.url.substr(1, request.url.length - 1);
-            fs.readFile(file.replace("/", "."), function (err, data) {
-                response.writeHead(200, {"Content-Type":"attachment;filename:" + file.replace("/", ".")});
+            file = file.replace("/", ".");
+            fileReader.read(file, function (err, data) {
+                response.writeHead(200, {"Content-Type":"attachment;filename:" + file});
                 response.write(data);
                 response.end();
             });
