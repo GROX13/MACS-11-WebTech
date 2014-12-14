@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>jQClone</title>
+    <script src="js/jQclone.js"></script>
+</head>
+<body>
+<div class="content-wrapper">
+    <p>Hello World</p>
+
+    <p>...</p>\
+
+    <ul class="level-1">
+        <li class="item-i">I</li>
+        <li class="item-ii">II
+            <ul class="level-2">
+                <li class="item-a">A</li>
+                <li class="item-b">B
+                    <ul class="level-3">
+                        <li class="item-1">1</li>
+                        <li class="item-2">2</li>
+                        <li class="item-3">3</li>
+                    </ul>
+                </li>
+                <li class="item-c">C</li>
+            </ul>
+        </li>
+        <li class="item-iii">III</li>
+    </ul>
+</div>
+
+<script>
+    var a = window.jQClone("div").find("ul");
+    for (var i = 0; i < a.length; i++)
+        console.log(a[i]);
+    $("div.content-wrapper")
+            .addClass("content-with-border")
+            .css({
+                "background-color": "red"
+            })
+            .each(function () {
+                console.log(this);
+            });
+</script>
+</body>
+
+</html>
