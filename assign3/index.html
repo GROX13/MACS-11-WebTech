@@ -9,7 +9,7 @@
 <div class="content-wrapper">
     <p>Hello World</p>
 
-    <p>...</p>\
+    <p>...</p>
 
     <ul class="level-1">
         <li class="item-i">I</li>
@@ -31,10 +31,10 @@
 </div>
 
 <script>
-    var a = window.jQClone("div");
-    for (var i = 0; i < a.length; i++)
-        console.log(a[i]);
-    console.log($("div").hasClass("content-wrapper"));
+    var div = window.jQClone("div");
+    for (var i = 0; i < div.length; i++)
+        console.log(div[i]);
+    console.log(div.hasClass("content-wrapper"));
     $("div.content-wrapper")
             .addClass("content-with-border")
             .css({
@@ -43,6 +43,8 @@
             .each(function () {
                 console.log(this);
             });
+    console.log(div.hasClass("content-wrapper content-with-border"));
+    console.log(div.hasClass("content-with-border content-wrapper"));
 </script>
 </body>
 

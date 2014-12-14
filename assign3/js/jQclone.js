@@ -30,22 +30,38 @@
     }
 
     function hasClass(className) {
-        var regex = "/(?:^|\\s)" + className.toString() + "(?!\\S)/";
-        console.log(regex);
-        return this.first().className.match(new RegExp(regex)) !== null;
+        var regex = new RegExp("(?:^|\\s)" + className + "(?!\\S)");
+        return this.first().className.match(regex) !== null;
     }
 
     function addClass(className) {
-        for (var i = 0; i < this.length; i++)
-            this[i].className += (" " + className);
+        var classNames = className.split(" ");
+        for (var i = 0; i < this.length; i++) {
+            for (var j = 0; j < classNames.length; j++) {
+                if (!this[i].hasClass(classNames[j]))
+                    this[i].className += (" " + className);
+            }
+        }
         return this;
     }
 
     function removeClass(className) {
-
+        var classNames = className.split(" ");
+        for (var i = 0; i < this.length; i++) {
+            for (var j = 0; j < classNames.length; j++) {
+                this[i].className
+                    .replace(new RegExp("(?:^|\\s)" + classNames[j] + "(?!\\S)/g", '' ));
+            }
+        }
+        return this;
     }
 
-    function toggleClass(className) {
+    function toggleClass(className, addOrRemove) {
+        addOrRemove = typeof addOrRemove !== 'undefined' ? addOrRemove : false;
+        if (addOrRemove)
+            this.addClass(className);
+        else
+            this.removeClass(className);
         return this;
     }
 
