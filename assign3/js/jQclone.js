@@ -89,8 +89,12 @@
         return this[0].getAttribute(name);
     }
 
-    function css(name) {
-        return this[0].getAttribute(name);
+    function css(cssStyle) {
+        return undefined;
+    }
+
+    function data() {
+
     }
 
     function setMethods(element) {
@@ -105,6 +109,7 @@
         element.toggleClass = toggleClass;
         element.attr = attr;
         element.css = css;
+        element.data = data;
         return element;
     }
 
