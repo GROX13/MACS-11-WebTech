@@ -29,20 +29,24 @@
         return setMethods(result);
     }
 
-    function hasClass(domclass) {
+    function hasClass(className) {
+        var regex = "/(?:^|\\s)" + className.toString() + "(?!\\S)/";
+        console.log(regex);
+        return this.first().className.match(new RegExp(regex)) !== null;
+    }
+
+    function addClass(className) {
+        for (var i = 0; i < this.length; i++)
+            this[i].className += (" " + className);
+        return this;
+    }
+
+    function removeClass(className) {
 
     }
 
-    function addClass(domclass) {
-
-    }
-
-    function removeClass(domclass) {
-
-    }
-
-    function toggleClass(domclass) {
-
+    function toggleClass(className) {
+        return this;
     }
 
     function setMethods(element) {
@@ -55,6 +59,7 @@
         element.addClass = addClass;
         element.removeClass = removeClass;
         element.toggleClass = toggleClass;
+        element.css = toggleClass;
         return element;
     }
 

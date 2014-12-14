@@ -31,9 +31,10 @@
 </div>
 
 <script>
-    var a = window.jQClone("div").find("ul");
+    var a = window.jQClone("div");
     for (var i = 0; i < a.length; i++)
         console.log(a[i]);
+    console.log($("div").hasClass("content-wrapper"));
     $("div.content-wrapper")
             .addClass("content-with-border")
             .css({
