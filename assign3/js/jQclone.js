@@ -2,8 +2,19 @@
  * Created by Giorgi on 12/14/2014.
  */
 
-/*
- *
+/**
+ * Self-Executing Anonymous Function
+ * =================================
+ * Nothing is accessible outside the anonymous function.
+ * To allow access to a variable or function, we need to
+ * expose it to the global ‘window’ object. One of the major
+ * benefits of this pattern is that you can limit access to
+ * variables and functions within your closure, essentially
+ * making them private and only choosing to expose an API of
+ * your choice to the global scope. One popular spin on this
+ * design pattern, which can be seen in the jQuery source, is
+ * to pass in some commonly used objects. In our code we
+ * reference ‘window’ as a parameter to the anonymous function.
  */
 (function (window, document) {
 // your implementation here
@@ -50,19 +61,36 @@
         for (var i = 0; i < this.length; i++) {
             for (var j = 0; j < classNames.length; j++) {
                 this[i].className
-                    .replace(new RegExp("(?:^|\\s)" + classNames[j] + "(?!\\S)/g", '' ));
+                    .replace(new RegExp("(?:^|\\s)" + classNames[j] + "(?!\\S)/g", ''));
             }
         }
         return this;
     }
 
     function toggleClass(className, addOrRemove) {
-        addOrRemove = typeof addOrRemove !== 'undefined' ? addOrRemove : false;
-        if (addOrRemove)
-            this.addClass(className);
-        else
-            this.removeClass(className);
+        var classNames = className.split(" ");
+        for (var i = 0; i < classNames.length; i++) {
+            if (typeof addOrRemove !== 'undefined') {
+                if (addOrRemove(classNames[i]))
+                    this.addClass(classNames[i]);
+                else
+                    this.removeClass(classNames[i]);
+            } else {
+                if (this.hasClass(classNames[i]))
+                    this.removeClass(classNames[i]);
+                else
+                    this.addClass(classNames[i]);
+            }
+        }
         return this;
+    }
+
+    function attr(name) {
+        return this[0].getAttribute(name);
+    }
+
+    function css(name) {
+        return this[0].getAttribute(name);
     }
 
     function setMethods(element) {
@@ -75,7 +103,8 @@
         element.addClass = addClass;
         element.removeClass = removeClass;
         element.toggleClass = toggleClass;
-        element.css = toggleClass;
+        element.attr = attr;
+        element.css = css;
         return element;
     }
 
