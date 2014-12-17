@@ -58,7 +58,8 @@
         var classNames = className.split(" ");
         for (var i = 0; i < this.length; i++) {
             for (var j = 0; j < classNames.length; j++) {
-                if (!this[i].hasClass(classNames[j]))
+                var regex = new RegExp("(?:^|\\s)" + classNames[j] + "(?!\\S)");
+                if (!regex.test(this[i].className))
                     this[i].className += (" " + classNames[j]);
             }
         }
