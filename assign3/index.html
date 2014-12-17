@@ -8,10 +8,12 @@
 <body>
 <div class="wrapper">
     <p>Hello World</p>
+
     <p>First test passed</p>
 </div>
 <div class="content-wrapper">
     <p>Hello World 2</p>
+
     <p>Hi!</p>
 </div>
 <script>
@@ -39,7 +41,7 @@
     console.log("Testing CSS");
     console.log(div.css("background-color"));
 
-        $("div.content-wrapper")
+    $("div.content-wrapper")
             .addClass("content-with-border")
             .css({
                 "background-color": "red"
@@ -47,9 +49,14 @@
             .each(function () {
                 console.log(this);
             });
-//    console.log(div.hasClass("content-wrapper content-with-border"));
-//    console.log(div.hasClass("content-with-border content-wrapper"));
+
+    console.log("Testing Data");
+    div.data({
+        name: "new name",
+        columns: 27
+    });
+    console.log(div.data());
+    console.log(div.data("name"));
 </script>
 </body>
-
 </html>

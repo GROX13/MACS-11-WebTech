@@ -140,29 +140,47 @@
     function data(key1, key2) {
         if (document.body.dataset) {
             // modern HTML5 browser
-            if (key1 === 'undefined' && key2 === 'undefined') {
-
-            } else if (key1 !== 'undefined') {
+            if (typeof key1 === 'undefined' && typeof key2 === 'undefined') {
+                if (this.length > 0) {
+                    var res = this[0].dataset;
+                    if (typeof res !== 'undefined')
+                        return res;
+                }
+            } else if (typeof key1 !== 'undefined' && typeof key2 === 'undefined') {
                 if (typeof key1 === 'string') {
-
+                    var data = this[0].dataset;
+                    if (typeof data !== 'undefined')
+                        return data[key1];
                 } else {
-
+                    for (var i = 0; i < this.length; i++) {
+                        for (var key in key1)
+                            if (key1.hasOwnProperty(key))
+                                this[i].dataset[key] = key1[key];
+                    }
                 }
             } else {
-
+                if (typeof this[0].dataset !== 'undefined')
+                    return [this[0].dataset[key1], this[0].dataset[key2]];
             }
         } else {
             // archaic browser, use custom solution
-            if (key1 === 'undefined' && key2 === 'undefined') {
-
-            } else if (key1 !== 'undefined') {
+            if (typeof key1 === 'undefined' && typeof key2 === 'undefined') {
+                if (this.length > 0)
+                    return this[0].attributes;
+            } else if (typeof key1 !== 'undefined' && typeof key2 === 'undefined') {
                 if (typeof key1 === 'string') {
-
+                    if (this.length > 0)
+                        return this[0].attributes[key1];
                 } else {
-
+                    for (var ind = 0; ind < this.length; ind++) {
+                        for (var ky in key1)
+                            if (key1.hasOwnProperty(ky))
+                                this[ind].attributes[ky] = key1[ky];
+                    }
                 }
             } else {
-
+                if (typeof this[0].attributes !== 'undefined')
+                     return [this[0].attributes[key1], this[0].attributes[key2]]
             }
         }
     }
