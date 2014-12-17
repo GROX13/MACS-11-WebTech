@@ -69,6 +69,15 @@
     $('p').css({
         "background-color": "red"
     });
+    $.ajax("example.php")
+            .done(function (data, status, xhr) { // invoked on
+                // Success
+                alert("Success");
+            })
+            .fail(function (xhr, status, errorThrown) { // invoked on
+                // Error
+                alert("Error");
+            });
 </script>
 </body>
 </html>

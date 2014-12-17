@@ -222,14 +222,19 @@
 
     function ajax(element) {
         // TODO: ajax method not implemented
-        var result, client = window.XMLHttpRequest
-            ? new XMLHttpRequest()
-            : new ActiveXObject("Microsoft.XMLHTTP");
-        result.done = function (callback) {
+        var result, xhr = window.XMLHttpRequest
+            ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+        if (typeof element === 'string') {
+            xhr.openRequest("GET", element);
+            xhr.send();
+        } else {
 
+        }
+        result.done = function (callback) {
+            xhr.addEventListener("load", callback);
         };
         result.fail = function (callback) {
-
+            xhr.addEventListener("error", callback);
         };
         return result
     }
