@@ -180,13 +180,39 @@
                 }
             } else {
                 if (typeof this[0].attributes !== 'undefined')
-                     return [this[0].attributes[key1], this[0].attributes[key2]]
+                    return [this[0].attributes[key1], this[0].attributes[key2]]
             }
         }
     }
 
+    function events(event, callback) {
+        if (typeof callback === 'undefined') {
+            for (var i = 0; i < this.length; i++)
+                this[i].addEventListener(event, callback);
+        } else {
+            for (var j = 0; j < this.length; j++)
+                callback.call(this);
+        }
+    }
+
+    function html() {
+
+    }
+
+    function append() {
+
+    }
+
+    function prepend() {
+
+    }
+
+    function empty() {
+
+    }
+
     function ajax(element) {
-        // TODO: ajax
+        // TODO: ajax method not implemented
         var result, client = window.XMLHttpRequest
             ? new XMLHttpRequest()
             : new ActiveXObject("Microsoft.XMLHTTP");
@@ -215,6 +241,11 @@
         element.attr = attr;
         element.css = css;
         element.data = data;
+        element.on = events;
+        element.html = html;
+        element.append = append;
+        element.prepend = prepend;
+        element.empty = empty;
         return element;
     }
 
