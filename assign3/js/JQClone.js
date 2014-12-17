@@ -222,21 +222,40 @@
 
     function ajax(element) {
         // TODO: ajax method not implemented
-        var result, xhr = window.XMLHttpRequest
+        var response, xhr = window.XMLHttpRequest
             ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
         if (typeof element === 'string') {
-            xhr.openRequest("GET", element);
-            xhr.send();
+            xhr.open("GET", element);
+            response = xhr.send();
         } else {
-
+            var tp, ul, dt;
+            if (typeof element[type] !== 'undefined') {
+                tp = element[type];
+            } else {
+                tp = "GET";
+            }
+            if (typeof element[url] !== 'undefined') {
+                ul = element[url];
+            } else {
+                ul = "";
+            }
+            if (typeof element[data] !== 'undefined') {
+                dt = element[data];
+            } else {
+                dt = {};
+            }
+            xhr.open(tp, ul);
+            response = xhr.send(dt);
         }
-        result.done = function (callback) {
+        xhr.done = function (callback) {
             xhr.addEventListener("load", callback);
+            return xhr;
         };
-        result.fail = function (callback) {
+        xhr.fail = function (callback) {
             xhr.addEventListener("error", callback);
+            return xhr;
         };
-        return result
+        return xhr
     }
 
     function factory(element) {
