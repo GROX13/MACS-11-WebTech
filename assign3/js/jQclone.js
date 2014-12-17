@@ -111,16 +111,27 @@
 
     function css(cssStyle, value) {
         if (typeof value !== 'undefined') {
-
+            for (i = 0; i < this.length; i++) {
+                for (var k in cssStyle)
+                    if (cssStyle.hasOwnProperty(k))
+                        this[i].style[k] = value;
+            }
         } else {
-            var i;
+            var i = 0;
             if (typeof cssStyle === Object) {
                 for (i = 0; i < this.length; i++) {
-                    this[i].style = cssStyle;
+                    for (var key in cssStyle)
+                        if (cssStyle.hasOwnProperty(key))
+                            this[i].style[key] = cssStyle[key];
                 }
             } else {
-                for (i = 0; i < this.length; i++) {
-                    this[i].style = cssStyle;
+                if (0 < this.length) {
+                    var style = this[i].style;
+                    var computedStyle = window.getComputedStyle(this[i]);
+                    return {
+                        Style: style[cssStyle],
+                        ComputedStyle: computedStyle[cssStyle]
+                    }
                 }
             }
         }
@@ -145,7 +156,7 @@
     }
 
     function done(callback) {
-        this.
+
     }
 
     function fail(callback) {
@@ -162,7 +173,6 @@
         element.removeClass = removeClass;
         element.toggleClass = toggleClass;
         element.attr = attr;
-
         element.css = css;
         element.data = data;
         return element;
