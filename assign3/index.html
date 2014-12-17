@@ -61,6 +61,14 @@
     divContWrap.on("click", function () {
         alert("I was clicked...");
     });
+    console.log(div.html());
+    div.html("<div>I'm new content</div>");
+    div.append("<p>first paragraph</p>");
+    div.prepend("<div>prepended</div>");
+    $("div.test-dis-class").empty();
+    $('p').css({
+        "background-color": "red"
+    });
 </script>
 </body>
 </html>

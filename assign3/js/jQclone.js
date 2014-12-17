@@ -195,20 +195,29 @@
         }
     }
 
-    function html() {
-
+    function html(element) {
+        if (typeof element === 'undefined') {
+            if (this.length > 0)
+                return this[0].innerHTML;
+        } else {
+            for (var i = 0; i < this.length; i++)
+                this[i].innerHTML = element;
+        }
     }
 
-    function append() {
-
+    function append(element) {
+        for (var i = 0; i < this.length; i++)
+            this[i].insertAdjacentHTML('afterend', element);
     }
 
-    function prepend() {
-
+    function prepend(element) {
+        for (var i = 0; i < this.length; i++)
+            this[i].insertAdjacentHTML('afterbegin', element);
     }
 
     function empty() {
-
+        for (var i = 0; i < this.length; i++)
+            this[i].innerHTML = "";
     }
 
     function ajax(element) {
@@ -216,17 +225,13 @@
         var result, client = window.XMLHttpRequest
             ? new XMLHttpRequest()
             : new ActiveXObject("Microsoft.XMLHTTP");
-        result.done = done;
-        result.fail = fail;
+        result.done = function (callback) {
+
+        };
+        result.fail = function (callback) {
+
+        };
         return result
-    }
-
-    function done(callback) {
-
-    }
-
-    function fail(callback) {
-
     }
 
     function factory(element) {
