@@ -221,31 +221,32 @@
     }
 
     function ajax(element) {
-        // TODO: ajax method not implemented
         var response, xhr = window.XMLHttpRequest
             ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
         if (typeof element === 'string') {
             xhr.open("GET", element);
             response = xhr.send();
+            console.log("Received: " + response);
         } else {
             var tp, ul, dt;
-            if (typeof element[type] !== 'undefined') {
-                tp = element[type];
+            if (typeof element['type'] !== 'undefined') {
+                tp = element['type'];
             } else {
                 tp = "GET";
             }
-            if (typeof element[url] !== 'undefined') {
-                ul = element[url];
+            if (typeof element['url'] !== 'undefined') {
+                ul = element['url'];
             } else {
                 ul = "";
             }
-            if (typeof element[data] !== 'undefined') {
-                dt = element[data];
+            if (typeof element['data'] !== 'undefined') {
+                dt = element['data'];
             } else {
                 dt = {};
             }
             xhr.open(tp, ul);
             response = xhr.send(dt);
+            console.log("Received: " + response);
         }
         xhr.done = function (callback) {
             xhr.addEventListener("load", callback);
