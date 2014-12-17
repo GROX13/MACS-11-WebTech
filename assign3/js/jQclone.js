@@ -117,17 +117,16 @@
                         this[i].style[k] = value;
             }
         } else {
-            var i = 0;
-            if (typeof cssStyle === Object) {
-                for (i = 0; i < this.length; i++) {
+            if (typeof cssStyle !== 'string') {
+                for (var i = 0; i < this.length; i++) {
                     for (var key in cssStyle)
                         if (cssStyle.hasOwnProperty(key))
                             this[i].style[key] = cssStyle[key];
                 }
             } else {
-                if (0 < this.length) {
-                    var style = this[i].style;
-                    var computedStyle = window.getComputedStyle(this[i]);
+                if (this.length > 0) {
+                    var style = this[0].style;
+                    var computedStyle = window.getComputedStyle(this[0]);
                     return {
                         Style: style[cssStyle],
                         ComputedStyle: computedStyle[cssStyle]
@@ -138,15 +137,38 @@
         return this;
     }
 
-    function data() {
+    function data(key1, key2) {
         if (document.body.dataset) {
             // modern HTML5 browser
+            if (key1 === 'undefined' && key2 === 'undefined') {
+
+            } else if (key1 !== 'undefined') {
+                if (typeof key1 === 'string') {
+
+                } else {
+
+                }
+            } else {
+
+            }
         } else {
             // archaic browser, use custom solution
+            if (key1 === 'undefined' && key2 === 'undefined') {
+
+            } else if (key1 !== 'undefined') {
+                if (typeof key1 === 'string') {
+
+                } else {
+
+                }
+            } else {
+
+            }
         }
     }
 
     function ajax(element) {
+        // TODO: ajax
         var result, client = window.XMLHttpRequest
             ? new XMLHttpRequest()
             : new ActiveXObject("Microsoft.XMLHTTP");

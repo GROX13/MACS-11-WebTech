@@ -36,7 +36,10 @@
     div.toggleClass("test-dis-class", true);
     div.attr("img", "blue");
     console.log(div.attr("img"));
-    $("div.content-wrapper")
+    console.log("Testing CSS");
+    console.log(div.css("background-color"));
+
+        $("div.content-wrapper")
             .addClass("content-with-border")
             .css({
                 "background-color": "red"
