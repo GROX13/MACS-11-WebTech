@@ -59,7 +59,7 @@
         for (var i = 0; i < this.length; i++) {
             for (var j = 0; j < classNames.length; j++) {
                 if (!this[i].hasClass(classNames[j]))
-                    this[i].className += (" " + className);
+                    this[i].className += (" " + classNames[j]);
             }
         }
         return this;
