@@ -70,8 +70,9 @@
         var classNames = className.split(" ");
         for (var i = 0; i < this.length; i++) {
             for (var j = 0; j < classNames.length; j++) {
-                this[i].className
-                    .replace(new RegExp("(?:^|\\s)" + classNames[j] + "(?!\\S)/g", ''));
+                var regex = new RegExp("(?:^|\\s)" + classNames[j] + "(?!\\S)");
+                this[i].className = this[i].className
+                    .replace(regex, '');
             }
         }
         return this;
@@ -81,7 +82,7 @@
         var classNames = className.split(" ");
         for (var i = 0; i < classNames.length; i++) {
             if (typeof addOrRemove !== 'undefined') {
-                if (addOrRemove(classNames[i]))
+                if (addOrRemove)
                     this.addClass(classNames[i]);
                 else
                     this.removeClass(classNames[i]);
@@ -95,15 +96,24 @@
         return this;
     }
 
-    function attr(name) {
-        return this[0].getAttribute(name);
+    function attr(name, value) {
+        var result = null;
+        if (typeof value !== 'undefined') {
+            for (var i = 0; i < this.length; i++)
+                this[i].setAttribute(name, value);
+            result = this;
+        } else {
+            if (this.length > 0)
+                result = this[0].getAttribute(name);
+        }
+        return result;
     }
 
     function css(cssStyle, value) {
-        var i;
         if (typeof value !== 'undefined') {
-            return this[0].getComputedStyle(cssStyle, null);
+
         } else {
+            var i;
             if (typeof cssStyle === Object) {
                 for (i = 0; i < this.length; i++) {
                     this[i].style = cssStyle;
@@ -125,6 +135,23 @@
         }
     }
 
+    function ajax(element) {
+        var result, client = window.XMLHttpRequest
+            ? new XMLHttpRequest()
+            : new ActiveXObject("Microsoft.XMLHTTP");
+        result.done = done;
+        result.fail = fail;
+        return result
+    }
+
+    function done(callback) {
+        this.
+    }
+
+    function fail(callback) {
+
+    }
+
     function factory(element) {
         element.first = first;
         element.last = last;
@@ -132,10 +159,10 @@
         element.find = find;
         element.hasClass = hasClass;
         element.addClass = addClass;
-
         element.removeClass = removeClass;
         element.toggleClass = toggleClass;
         element.attr = attr;
+
         element.css = css;
         element.data = data;
         return element;
@@ -159,4 +186,5 @@
         return factory(result);
     };
     window.$ = window.JQClone;
+    window.$.ajax = ajax;
 })(window, document);

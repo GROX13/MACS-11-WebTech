@@ -31,15 +31,19 @@
     console.log(tmp.first());
     console.log(div.hasClass("wrapper"));
     console.log(div.hasClass("content-wrapper"));
-    div.addClass("test-class");
-//    $("div.content-wrapper")
-//            .addClass("content-with-border")
-//            .css({
-//                "background-color": "red"
-//            })
-//            .each(function () {
-//                console.log(this);
-//            });
+    div.addClass("test-class wrapper").removeClass("wrapper");
+    div.toggleClass("test-class");
+    div.toggleClass("test-dis-class", true);
+    div.attr("img", "blue");
+    console.log(div.attr("img"));
+    $("div.content-wrapper")
+            .addClass("content-with-border")
+            .css({
+                "background-color": "red"
+            })
+            .each(function () {
+                console.log(this);
+            });
 //    console.log(div.hasClass("content-wrapper content-with-border"));
 //    console.log(div.hasClass("content-with-border content-wrapper"));
 </script>
